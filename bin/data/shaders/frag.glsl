@@ -1,0 +1,18 @@
+// fragment shader
+#version 150 core
+
+// this is how we receive the texture
+uniform sampler2DRect tex0;
+//in vec2 texcoord;
+out vec4 outputColor;
+
+/*in VertexData {
+    vec2 texCoord;
+    vec3 normal;
+} VertexIn;*/
+
+void main()
+{
+    //outputColor = texture(tex0, VertexIn.texCoord);
+    outputColor = vec4(1.0, 1.0, 1.0, 0.1);
+}
