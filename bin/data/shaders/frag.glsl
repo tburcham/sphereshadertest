@@ -37,7 +37,7 @@ void main(void)
     vec2 r = pos - center;
     float mr = length(r);
     vec2 posM;
-    float angT = 0.0;//10.0*time;
+    float angT = 10.0*time;
     
     float expansionT = 5.0;
     float giroT = 20.0;

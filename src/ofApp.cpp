@@ -9,17 +9,19 @@ void ofApp::setup(){
     ofEnableSmoothing();
     ofSetLogLevel(OF_LOG_VERBOSE);
     ofSetVerticalSync(true);
+    ofEnableDepthTest();
+    ofEnableAntiAliasing();
     
-    int camWidth 		= 320;	// try to grab at this size.
-    int camHeight 		= 240;
+    int camWidth 		= 640;	// try to grab at this size.
+    int camHeight 		= 480;
     
-    /*vidGrabber.setVerbose(true);
-    vidGrabber.setup(camWidth,camHeight);*/
+    vidGrabber.setVerbose(true);
+    vidGrabber.setup(camWidth,camHeight);
 
     
-    shader.setGeometryInputType(GL_TRIANGLE_STRIP);
-    shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
-    shader.setGeometryOutputCount(4);
+    //shader.setGeometryInputType(GL_TRIANGLE_STRIP);
+    //shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
+    //shader.setGeometryOutputCount(4);
     shader.load("shaders/vert.glsl", "shaders/frag.glsl", "shaders/geom.glsl");
     
     //shader.load("shaders/vert.glsl", "shaders/frag.glsl");
@@ -36,14 +38,14 @@ void ofApp::setup(){
     
     sphere.setRadius(300);
     sphere.setResolution(25);
-    sphere.mapTexCoords(0, 0, texturePatternImg.getWidth(), texturePatternImg.getHeight());
+    sphere.mapTexCoords(0, 0, vidGrabber.getWidth(), vidGrabber.getHeight());
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    //vidGrabber.update();
+    vidGrabber.update();
     //movie.update()
 
     fbo.begin();
@@ -69,17 +71,18 @@ void ofApp::update(){
     
     
     // set thickness of ribbons
-    shader.setUniform1f("thickness", 1);
+    shader.setUniform1f("thickness", 10);
     
     // make light direction slowly rotate
     shader.setUniform3f("lightDir", sin(ofGetElapsedTimef()/20), cos(ofGetElapsedTimef()/20), 0);
     
-    shader.setUniform2f("resolution", ofVec2f(500, 500));
+    shader.setUniform2f("resolution", ofVec2f(vidGrabber.getWidth(), vidGrabber.getHeight()));
     shader.setUniform2f("mouse", ofVec2f(mouseX, mouseY));
     shader.setUniform1f("time", ofGetElapsedTimef());
     
     // Pass the video texture
-    shader.setUniformTexture("tex0", texturePatternImg.getTexture() , 1 );
+    //shader.setUniformTexture("tex0", texturePatternImg.getTexture() , 1 );
+    shader.setUniformTexture("tex0", vidGrabber.getTexture(), 1);
     
     shader.end();
     
