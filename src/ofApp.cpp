@@ -74,7 +74,7 @@ void ofApp::update(){
     // make light direction slowly rotate
     shader.setUniform3f("lightDir", sin(ofGetElapsedTimef()/20), cos(ofGetElapsedTimef()/20), 0);
     
-    shader.setUniform2f("resolution", ofVec2f(72, 72));
+    shader.setUniform2f("resolution", ofVec2f(500, 500));
     shader.setUniform2f("mouse", ofVec2f(mouseX, mouseY));
     shader.setUniform1f("time", ofGetElapsedTimef());
     

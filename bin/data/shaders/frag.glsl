@@ -94,14 +94,14 @@ void main(void)
         }
         
         if (posM.x <= 0.0 || posM.y <= 0.0 || posM.y > resolution.y || posM.x > resolution.x){
-            if (resolution.x > 0) {
+            /*if (resolution.x > 0) {
                 
                 outputColor = vec4(1.0, 0.0, 0.0, 1.0);
             } else {
                 
                 discard;
                 
-            }
+            }*/
             
             discard;
         } else {
