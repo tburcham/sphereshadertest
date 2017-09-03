@@ -8,13 +8,13 @@ uniform mat4 textureMatrix;
 uniform mat4 modelViewProjectionMatrix;
 
 in vec4 position;
-//in vec4 color;
+in vec4 color;
 in vec3 normal;
-in vec2 texCoord;
+in vec2 texcoord;
 // this is the end of the default functionality
 
 // this is something we're creating for this shader
-//out vec2 varyingtexcoord;
+out vec2 vTexCoord;
 
 // this is coming from our C++ code
 uniform float mouseX;
@@ -32,6 +32,8 @@ void main()
     
     /*VertexOut.texCoord = texCoord;
     VertexOut.normal = normal;*/
+    
+    vTexCoord = texcoord;
     
     // send the vertices to the fragment shader
     //gl_Position = modelViewProjectionMatrix * position;

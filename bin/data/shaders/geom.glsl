@@ -13,18 +13,18 @@ uniform mat4 modelViewProjectionMatrix;
 uniform float thickness;
 uniform vec3 lightDir;
 
-//in vec2 varyingtexcoord[];
-//out vec2 texcoord;
+in vec2 vTexCoord[];
+out vec2 texCoord;
 
 /*in VertexData {
     vec2 texCoord;
     vec3 normal;
-} VertexIn[];*/
+} VertexIn[];
 
 out VertexData {
     vec2 texCoord;
     vec3 normal;
-} VertexOut;
+} VertexOut;*/
 
 void main()
 {
@@ -44,6 +44,8 @@ void main()
     vec4 colMult = vec4(fColMult, fColMult, fColMult, 3.0);*/
     
     right += thickness;
+    
+    texCoord = vTexCoord[0];
     
     //gl_Position = gl_in[0].gl_Position + vec4(-100.0, 100.0, 100.0, 1.0);
     gl_Position = modelViewProjectionMatrix * vec4(p0 - right, 1.0);
